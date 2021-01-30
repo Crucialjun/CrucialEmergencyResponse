@@ -114,7 +114,6 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="120dp"
-                    android:adjustViewBounds="false"
                     android:src="@drawable/ic_mech_vector_wheel">
 
                 </ImageView>
