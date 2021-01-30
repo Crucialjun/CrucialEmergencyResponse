@@ -32,15 +32,15 @@
             android:padding="4dp"
             android:text="Crucial Emergency Response"
             android:textColor="#FFFFFF"
-            android:textSize="36sp"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/ic_profile"
@@ -58,20 +58,19 @@
             android:padding="4dp"
             android:text="UserName"
             android:textColor="#FFFFFF"
-            android:textSize="24dp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
             app:layout_constraintStart_toEndOf="@+id/circleImageView"
             app:layout_constraintTop_toTopOf="@+id/circleImageView" />
 
         <TextView
-            android:layout_marginBottom="18dp"
+            android:layout_marginBottom="4dp"
             android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/muli"
-            android:padding="16dp"
             android:text="@string/dashboard_tag_line"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
@@ -175,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/muli_black"
-                    android:text="Mechanics"
+                    android:text="Breakdowns"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="18sp">
@@ -226,7 +225,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/muli_black"
-                    android:text="Mechanics"
+                    android:text="Fuel Stations"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="18sp">
@@ -277,7 +276,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/muli_black"
-                    android:text="Mechanics"
+                    android:text="Hospitals"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="18sp">
@@ -325,7 +324,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/muli_black"
-                    android:text="Mechanics"
+                    android:text="Basics Manual"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="18sp">
