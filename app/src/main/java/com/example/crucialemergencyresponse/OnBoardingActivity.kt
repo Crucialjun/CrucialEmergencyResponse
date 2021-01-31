@@ -2,10 +2,20 @@ package com.example.crucialemergencyresponse
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.crucialemergencyresponse.databinding.ActivityMainBinding
+import com.example.crucialemergencyresponse.databinding.ActivityOnBoardingBinding
 
 class OnBoardingActivity : AppCompatActivity() {
+    lateinit var viewBinding : ActivityOnBoardingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_on_boarding)
+
+        //attach the viewBinding
+        viewBinding = ActivityOnBoardingBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
+
+
+        viewBinding.
     }
 }
