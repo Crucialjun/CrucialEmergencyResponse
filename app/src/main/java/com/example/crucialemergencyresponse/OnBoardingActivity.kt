@@ -18,9 +18,12 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
 
 
-
-
+        //Add items to the onboarding screens
         setOnBoardingItems()
+
+        viewBinding.viewpagerOnboarding.apply {
+            adapter = OnboardingViewpagerAdapter(context,onBoardingItems)
+        }
 
     }
 
