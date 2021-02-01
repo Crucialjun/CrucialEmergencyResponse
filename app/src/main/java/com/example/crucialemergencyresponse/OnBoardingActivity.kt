@@ -1,14 +1,21 @@
 package com.example.crucialemergencyresponse
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import androidx.viewpager.widget.ViewPager
 import com.example.crucialemergencyresponse.databinding.ActivityMainBinding
 import com.example.crucialemergencyresponse.databinding.ActivityOnBoardingBinding
+import com.google.android.material.tabs.TabLayout
 
 class OnBoardingActivity : AppCompatActivity() {
     lateinit var viewBinding : ActivityOnBoardingBinding
 
     var onBoardingItems : MutableList<OnBoardingItem> = ArrayList()
+    private lateinit var onboardingGetStartedButtonAnimation: Animation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +25,11 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
 
 
+        //initialize button animation
+        onboardingGetStartedButtonAnimation =
+            AnimationUtils.loadAnimation(applicationContext,R.anim.button_bounce)
+
+
         //Add items to the onboarding screens
         setOnBoardingItems()
 
@@ -25,6 +37,49 @@ class OnBoardingActivity : AppCompatActivity() {
             adapter = OnboardingViewpagerAdapter(context,onBoardingItems)
         }
 
+        //setup indicators to show the current page
+        setupOnboardingIndicators(viewBinding.viewpagerOnboarding)
+
+
+
+
+        viewBinding.layoutOnboardingIndicator.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if(tab?.position == onBoardingItems.size -1){
+                    loadLastScreen()
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+
+
+        })
+
+        //Skip the onboarding screen on Skip button pressed
+        viewBinding.btnOnboardingSkip.setOnClickListener {
+            val intent = Intent(this@OnBoardingActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+
+    }
+
+    private fun loadLastScreen() {
+        viewBinding.btnOnboardingGetStarted.visibility = View.VISIBLE
+        viewBinding.btnOnboardingGetStarted.animation = onboardingGetStartedButtonAnimation
+        viewBinding.btnOnboardingSkip.visibility = View.GONE
+        viewBinding.btnOnboardingPrevious.visibility = View.GONE
+        viewBinding.btnOnboardingNext.visibility = View.GONE
+    }
+
+    private fun setupOnboardingIndicators(viewpagerOnboarding: ViewPager) {
+        viewBinding.layoutOnboardingIndicator.setupWithViewPager(viewpagerOnboarding)
     }
 
     private fun setOnBoardingItems(){
@@ -38,8 +93,8 @@ class OnBoardingActivity : AppCompatActivity() {
         val onboardingAmbulances = OnBoardingItem()
 
 
-        onboardingMechanics.title = "Mechanics Available"
-        onboardingMechanics.description = "A large number of mchanics available at your service wherever you might be in the country"
+        onboardingMechanics.title = getString(R.string.onboarding_mechanic_title)
+        onboardingMechanics.description = getString(R.string.onboarding_mechanic_description)
         onboardingMechanics.image = R.drawable.ic_mechanics_illustration
 
         onboardingTowtrucks.title = "Mechanics Available"

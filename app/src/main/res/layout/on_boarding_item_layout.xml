@@ -16,9 +16,10 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:padding="4dp"
             android:id="@+id/img_viewpager_image_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="360dp"
             android:adjustViewBounds="true"
             app:layout_constraintBottom_toTopOf="@+id/txt_viepager_title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,10 +30,13 @@
             tools:srcCompat="@drawable/ic_ambulance" />
 
         <TextView
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            android:fontFamily="@font/muli_black"
+            tools:text="@string/onboarding_mechanic_title"
             android:id="@+id/txt_viepager_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/txt_viewpager_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -40,15 +44,20 @@
             app:layout_constraintTop_toBottomOf="@+id/img_viewpager_image_container" />
 
         <TextView
+            android:textSize="16sp"
+            android:fontFamily="@font/muli"
+            android:padding="4dp"
             android:id="@+id/txt_viewpager_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_viepager_title" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_viepager_title"
+            tools:text="@string/onboarding_mechanic_description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

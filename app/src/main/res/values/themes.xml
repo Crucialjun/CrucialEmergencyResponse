@@ -2,11 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.CrucialEmergencyResponse" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#f44336</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">#ba000d</item>
         <item name="colorOnPrimary">#000000</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#02a9f4</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">#007ac1</item>
         <item name="colorOnSecondary">#000000</item>
         <!-- Status bar color. -->
