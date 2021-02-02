@@ -16,6 +16,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     var onBoardingItems : MutableList<OnBoardingItem> = ArrayList()
     private lateinit var onboardingGetStartedButtonAnimation: Animation
+    var position = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +64,39 @@ class OnBoardingActivity : AppCompatActivity() {
 
         //Skip the onboarding screen on Skip button pressed
         viewBinding.btnOnboardingSkip.setOnClickListener {
-            val intent = Intent(this@OnBoardingActivity, MainActivity::class.java)
-            startActivity(intent)
+            openNextScreen()
+        }
+
+        viewBinding.btnOnboardingGetStarted.setOnClickListener { openNextScreen() }
+
+        viewBinding.btnOnboardingNext.setOnClickListener {
+            position = viewBinding.viewpagerOnboarding.currentItem
+
+            if (position < onBoardingItems.size) {
+                position++
+                viewBinding.viewpagerOnboarding.currentItem = position
+            }
+
+            if (position == onBoardingItems.size - 1) {
+                loadLastScreen()
+            }
+        }
+
+        viewBinding.btnOnboardingPrevious.setOnClickListener {
+            position = viewBinding.viewpagerOnboarding.currentItem
+
+            if (position < onBoardingItems.size) {
+                position--
+                viewBinding.viewpagerOnboarding.currentItem = position
+            }
         }
 
 
+    }
+
+    private fun openNextScreen() {
+        val intent = Intent(this@OnBoardingActivity, LoginSignupActivity::class.java)
+        startActivity(intent)
     }
 
     private fun loadLastScreen() {

@@ -3,4 +3,6 @@
     <string name="dashboard_tag_line">Crucial emergency response organization is a team of skilled emergency respondants with the aim of providing roadside emergency assistance in a quick and efficient manner </string>
     <string name="onboarding_mechanic_title">Mechanics Available</string>
     <string name="onboarding_mechanic_description">A large number of mchanics available at your service wherever you might be in the country</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
