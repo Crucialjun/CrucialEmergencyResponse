@@ -97,6 +97,7 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun openNextScreen() {
         val intent = Intent(this@OnBoardingActivity, LoginSignupActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun loadLastScreen() {
