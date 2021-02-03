@@ -2,6 +2,7 @@ package com.example.crucialemergencyresponse
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import androidx.navigation.navArgs
 import com.example.crucialemergencyresponse.databinding.ActivityMainBinding
@@ -25,6 +26,13 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.txtDashboardUsername.text = args.username
+
+        binding.cardviewMechanics.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                TODO("Not yet implemented")
+            }
+
+        })
 
 
     }

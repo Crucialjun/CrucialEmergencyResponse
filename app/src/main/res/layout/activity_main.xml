@@ -92,7 +92,7 @@
         <com.google.android.material.card.MaterialCardView
             app:strokeColor="@color/material_on_surface_stroke"
             app:strokeWidth="2dp"
-            android:id="@+id/cardView1"
+            android:id="@+id/cardview_mechanics"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -150,11 +150,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/cardView1"
+            app:layout_constraintBottom_toBottomOf="@+id/cardview_mechanics"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cardView1"
-            app:layout_constraintTop_toTopOf="@+id/cardView1"
+            app:layout_constraintStart_toEndOf="@+id/cardview_mechanics"
+            app:layout_constraintTop_toTopOf="@+id/cardview_mechanics"
             app:strokeColor="@color/material_on_surface_stroke"
             app:strokeWidth="2dp">
 
@@ -206,7 +206,7 @@
             app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView1"
+            app:layout_constraintTop_toBottomOf="@+id/cardview_mechanics"
             app:strokeColor="@color/material_on_surface_stroke"
             app:strokeWidth="2dp">
 
