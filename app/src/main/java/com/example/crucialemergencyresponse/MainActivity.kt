@@ -1,5 +1,6 @@
 package com.example.crucialemergencyresponse
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -29,10 +30,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.cardviewMechanics.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                TODO("Not yet implemented")
+                startActivity(Intent(this@MainActivity,MechanicsMapHolderActivity::class.java))
             }
 
         })
+
 
 
     }
