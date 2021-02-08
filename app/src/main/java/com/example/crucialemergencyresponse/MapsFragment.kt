@@ -1,20 +1,40 @@
 package com.example.crucialemergencyresponse
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.content.res.Resources
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.*
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 
 class MapsFragment : Fragment() {
+
+    private lateinit var mMap: GoogleMap
+    lateinit var locationRequest: LocationRequest
+    lateinit var locationCallback: LocationCallback
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -26,9 +46,73 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        mMap = googleMap
+
+        Dexter.withContext(requireContext())
+            .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            .withListener(object : PermissionListener{
+
+            override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+                mMap.isMyLocationEnabled = true
+                mMap.uiSettings.isMyLocationButtonEnabled = true
+                mMap.setOnMyLocationClickListener {
+                    if (ActivityCompat.checkSelfPermission(
+                            requireContext(),
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            requireContext(),
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return@setOnMyLocationClickListener
+                    }
+                    fusedLocationProviderClient.lastLocation.addOnFailureListener {
+
+                    }.addOnSuccessListener {
+                        val userLatlng = LatLng(it.latitude,it.longitude)
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatlng,18f))
+                    }
+                }
+            }
+
+            override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onPermissionRationaleShouldBeShown(
+                p0: PermissionRequest?,
+                p1: PermissionToken?
+            ) {
+                TODO("Not yet implemented")
+            }
+        }).check()
+
+
+        try{
+            val success = googleMap
+                .setMapStyle(MapStyleOptions
+                    .loadRawResourceStyle(context,R.raw.uber_maps_style))
+            if(!success){
+                Log.e("ERROR", "Style parsing Error" )
+            }
+        }catch (e:Resources.NotFoundException){
+            Log.e("Error", e.message.toString())
+        }
+
+    }
+
+    override fun onDestroy() {
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+
+        super.onDestroy()
     }
 
     override fun onCreateView(
@@ -36,8 +120,51 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        init()
+
         return inflater.inflate(R.layout.fragment_maps, container, false)
     }
+
+    private fun init() {
+        locationRequest = LocationRequest()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.fastestInterval = 3000
+        locationRequest.interval = 5000
+        locationRequest.smallestDisplacement = 10f
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                super.onLocationResult(locationResult)
+
+                val newPos = LatLng(locationResult!!.lastLocation.latitude
+                    ,locationResult.lastLocation.longitude)
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newPos,18f))
+            }
+        }
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper())
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
