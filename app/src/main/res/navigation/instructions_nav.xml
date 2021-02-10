@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/instructions_nav">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/instructions_nav"
+    app:startDestination="@id/instructionsListFragment">
 
+    <fragment
+        android:id="@+id/instructionsListFragment"
+        android:name="com.example.crucialemergencyresponse.InstructionsListFragment"
+        android:label="fragment_instructions_list"
+        tools:layout="@layout/fragment_instructions_list" />
 </navigation>

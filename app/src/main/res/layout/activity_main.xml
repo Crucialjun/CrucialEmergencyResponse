@@ -300,6 +300,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardview_instructions"
             android:layout_marginBottom="16dp"
             app:strokeColor="@color/material_on_surface_stroke"
             app:strokeWidth="2dp"

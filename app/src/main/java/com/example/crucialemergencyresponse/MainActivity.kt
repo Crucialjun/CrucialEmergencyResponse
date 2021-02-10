@@ -28,12 +28,18 @@ class MainActivity : AppCompatActivity() {
 
         binding.txtDashboardUsername.text = args.username
 
-        binding.cardviewMechanics.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(p0: View?) {
-                startActivity(Intent(this@MainActivity,MechanicsMapHolderActivity::class.java))
-            }
+        binding.cardviewMechanics.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@MainActivity,
+                    MechanicsMapHolderActivity::class.java
+                )
+            )
+        }
 
-        })
+        binding.cardviewInstructions.setOnClickListener{
+            startActivity(Intent(this,InstructionsActivity::class.java))
+        }
 
 
 
