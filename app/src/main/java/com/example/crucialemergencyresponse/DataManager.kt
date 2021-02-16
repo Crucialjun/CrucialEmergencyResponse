@@ -27,8 +27,28 @@ object DataManager {
 
 
     private fun initializeMechs() {
-        val mech = MechanicInfo("Cole Hopkins","0754231345", LatLng(32.00,-120.08))
-        mechanics.add(mech)
+        var mechanic = MechanicInfo(
+            "Cole Hopkins",
+            "0754231345"
+        )
+
+        mechanics.add(mechanic)
+
+        mechanic = MechanicInfo(
+            "Crucial Jun",
+            "0754231345"
+        )
+
+        mechanics.add(mechanic)
+
+        mechanic = MechanicInfo(
+            "John Doe",
+            "0754231345"
+        )
+
+        mechanics.add(mechanic)
+
+
     }
 }
 

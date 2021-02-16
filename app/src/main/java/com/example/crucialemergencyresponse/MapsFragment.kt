@@ -2,8 +2,10 @@ package com.example.crucialemergencyresponse
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.graphics.BitmapFactory
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -19,9 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -51,49 +51,62 @@ class MapsFragment : Fragment() {
 
         Dexter.withContext(requireContext())
             .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-            .withListener(object : PermissionListener{
+            .withListener(object : PermissionListener {
 
-            override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-                mMap.isMyLocationEnabled = true
-                mMap.uiSettings.isMyLocationButtonEnabled = true
-                mMap.setOnMyLocationClickListener {
-                    if (ActivityCompat.checkSelfPermission(
-                            requireContext(),
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                            requireContext(),
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return@setOnMyLocationClickListener
-                    }
-                    fusedLocationProviderClient.lastLocation.addOnFailureListener {
+                override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+                    mMap.isMyLocationEnabled = true
+                    mMap.uiSettings.isMyLocationButtonEnabled = true
+                    mMap.setOnMyLocationButtonClickListener {
+                        if (ActivityCompat.checkSelfPermission(
+                                requireContext(),
+                                Manifest.permission.ACCESS_FINE_LOCATION
+                            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                                requireContext(),
+                                Manifest.permission.ACCESS_COARSE_LOCATION
+                            ) != PackageManager.PERMISSION_GRANTED
+                        ) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            return@setOnMyLocationButtonClickListener  false
+                        }
+                        fusedLocationProviderClient.lastLocation.addOnFailureListener {
 
-                    }.addOnSuccessListener {
-                        val userLatlng = LatLng(it.latitude,it.longitude)
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatlng,18f))
+                        }.addOnSuccessListener {
+                            val userLatlng = LatLng(it.latitude, it.longitude)
+
+
+
+
+
+
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatlng, 18f))
+                        }
+
+                        true
+
                     }
+
+
+
                 }
-            }
 
-            override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
-                TODO("Not yet implemented")
-            }
+                override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
+                    TODO("Not yet implemented")
+                }
 
-            override fun onPermissionRationaleShouldBeShown(
-                p0: PermissionRequest?,
-                p1: PermissionToken?
-            ) {
-                TODO("Not yet implemented")
-            }
-        }).check()
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: PermissionRequest?,
+                    p1: PermissionToken?
+                ) {
+                    TODO("Not yet implemented")
+                }
+            }).check()
+
 
 
         try{
@@ -106,6 +119,12 @@ class MapsFragment : Fragment() {
         }catch (e:Resources.NotFoundException){
             Log.e("Error", e.message.toString())
         }
+
+//        for (mech in DataManager.mechanics) {
+//            mMap.addMarker(
+//                MarkerOptions().position(Utils.currentLocation).title(mech.name)
+//            )
+//        }
 
     }
 
@@ -140,7 +159,26 @@ class MapsFragment : Fragment() {
                 val newPos = LatLng(locationResult!!.lastLocation.latitude
                     ,locationResult.lastLocation.longitude)
 
+                val markeOption = MarkerOptions()
+
+                mMap.clear()
+
+                val mechanics = DataManager.mechanics
+                for (mechanic in mechanics){
+                    mechanic.location = Utils.getRadomLocation(newPos.latitude,newPos.longitude)
+                    markeOption
+                        .position(mechanic.location!!)
+                        .title(mechanic.name)
+                        .icon(BitmapDescriptorFactory.fromBitmap(
+                            Utils.getBitmapFromVectorDrawable(requireContext(),R.drawable.ic_mechanics_illustration))
+                        )
+                    mMap.addMarker(markeOption).showInfoWindow()
+
+                }
+
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newPos,18f))
+
+
             }
         }
 
@@ -163,6 +201,7 @@ class MapsFragment : Fragment() {
             return
         }
         fusedLocationProviderClient.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper())
+
     }
 
 
@@ -171,4 +210,5 @@ class MapsFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
+
 }
