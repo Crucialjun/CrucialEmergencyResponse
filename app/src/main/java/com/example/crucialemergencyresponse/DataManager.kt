@@ -4,10 +4,12 @@ import com.google.android.gms.maps.model.LatLng
 
 object DataManager {
     val mechanics = ArrayList<MechanicInfo>()
+    val towTrucks = ArrayList<TowTruckInfo>()
     val instructions = ArrayList<InstructionsInfo>()
 
     init{
         initializeMechs()
+        initializeTowTrucks()
         initializeInstructions()
     }
 
@@ -47,6 +49,31 @@ object DataManager {
         )
 
         mechanics.add(mechanic)
+
+
+    }
+
+    private fun initializeTowTrucks() {
+        var towTruck = TowTruckInfo(
+            "Cole Hopkins",
+            "0754231345"
+        )
+
+        towTrucks.add(towTruck)
+
+        towTruck = TowTruckInfo(
+            "Crucial Jun",
+            "0754231345"
+        )
+
+        towTrucks.add(towTruck)
+
+        towTruck = TowTruckInfo(
+            "John Doe",
+            "0754231345"
+        )
+
+        towTrucks.add(towTruck)
 
 
     }

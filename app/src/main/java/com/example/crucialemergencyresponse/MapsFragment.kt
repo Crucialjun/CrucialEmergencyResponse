@@ -79,8 +79,7 @@ class MapsFragment : Fragment() {
                         }.addOnSuccessListener {
                             val userLatlng = LatLng(it.latitude, it.longitude)
 
-
-
+                            setMarkers(userLatlng)
 
 
 
@@ -159,22 +158,7 @@ class MapsFragment : Fragment() {
                 val newPos = LatLng(locationResult!!.lastLocation.latitude
                     ,locationResult.lastLocation.longitude)
 
-                val markeOption = MarkerOptions()
-
-                mMap.clear()
-
-                val mechanics = DataManager.mechanics
-                for (mechanic in mechanics){
-                    mechanic.location = Utils.getRadomLocation(newPos.latitude,newPos.longitude)
-                    markeOption
-                        .position(mechanic.location!!)
-                        .title(mechanic.name)
-                        .icon(BitmapDescriptorFactory.fromBitmap(
-                            Utils.getBitmapFromVectorDrawable(requireContext(),R.drawable.ic_mechanics_illustration))
-                        )
-                    mMap.addMarker(markeOption).showInfoWindow()
-
-                }
+                setMarkers(newPos)
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newPos,18f))
 
@@ -202,6 +186,27 @@ class MapsFragment : Fragment() {
         }
         fusedLocationProviderClient.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper())
 
+    }
+
+    private fun setMarkers(newPos: LatLng) {
+        val markeOption = MarkerOptions()
+
+        mMap.clear()
+
+        val mechanics = DataManager.mechanics
+        for (mechanic in mechanics) {
+            mechanic.location = Utils.getRadomLocation(newPos.latitude, newPos.longitude)
+            markeOption.position(mechanic.location!!).title(mechanic.name).icon(
+                BitmapDescriptorFactory.fromBitmap(
+                    Utils.getBitmapFromVectorDrawable(
+                        requireContext(),
+                        R.drawable.ic_mechanics_illustration
+                    )
+                )
+            )
+            mMap.addMarker(markeOption).showInfoWindow()
+
+        }
     }
 
 

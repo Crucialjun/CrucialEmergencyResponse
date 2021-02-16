@@ -6,6 +6,10 @@ data class MechanicInfo(var name : String, var phone : String, var location : La
 
 }
 
+data class TowTruckInfo(var name : String, var phone : String, var location : LatLng? = null) {
+
+}
+
 data class InstructionsInfo(var title : String, var text : String) {
 
 }

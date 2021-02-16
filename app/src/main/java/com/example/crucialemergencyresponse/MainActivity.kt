@@ -9,11 +9,16 @@ import androidx.navigation.navArgs
 import com.example.crucialemergencyresponse.databinding.ActivityMainBinding
 import com.example.crucialemergencyresponse.databinding.FragmentLoginBinding
 
+private val MainActivity.intent: Intent
+    get() = Intent(this, InstructionsActivity::class.java)
+
 class MainActivity : AppCompatActivity() {
 
     private val args : MainActivityArgs by navArgs()
 
     lateinit var binding: ActivityMainBinding
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +34,20 @@ class MainActivity : AppCompatActivity() {
         binding.txtDashboardUsername.text = args.username
 
         binding.cardviewMechanics.setOnClickListener {
-            startActivity(
-                Intent(
-                    this@MainActivity,
-                    MechanicsMapHolderActivity::class.java
-                )
-            )
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra(MAP_LOAD, MECHANICS_ID)
+            startActivity(intent)
+        }
+
+        binding.cardviewTowtrucks.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra(MAP_LOAD, TOW_TRUCKS_ID)
+            startActivity(intent)
         }
 
         binding.cardviewInstructions.setOnClickListener{
-            startActivity(Intent(this,InstructionsActivity::class.java))
+            val intent = Intent(this, InstructionsActivity::class.java)
+            startActivity(intent)
         }
 
 
