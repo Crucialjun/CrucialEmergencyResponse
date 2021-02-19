@@ -214,6 +214,38 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 }
             }
+            FUEL_STATIONS_ID -> {
+                val fuelStations = DataManager.fillingStations
+                for (fuelStation in fuelStations) {
+                    fuelStation.location = Utils.getRadomLocation(newPos.latitude, newPos.longitude)
+                    markeOption.position(fuelStation.location!!).title(fuelStation.name).icon(
+                        BitmapDescriptorFactory.fromBitmap(
+                            Utils.getBitmapFromVectorDrawable(
+                                this,
+                                R.drawable.ic_fuel_stations
+                            )
+                        )
+                    )
+                    mMap.addMarker(markeOption).showInfoWindow()
+
+                }
+            }
+            AMBULANCES_ID -> {
+                val ambulances = DataManager.ambulances
+                for (ambulance in ambulances) {
+                    ambulance.location = Utils.getRadomLocation(newPos.latitude, newPos.longitude)
+                    markeOption.position(ambulance.location!!).title(ambulance.name).icon(
+                        BitmapDescriptorFactory.fromBitmap(
+                            Utils.getBitmapFromVectorDrawable(
+                                this,
+                                R.drawable.ic_ambulance
+                            )
+                        )
+                    )
+                    mMap.addMarker(markeOption).showInfoWindow()
+
+                }
+            }
         }
 
     }

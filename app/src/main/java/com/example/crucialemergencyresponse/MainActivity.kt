@@ -45,6 +45,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.cardViewFuelStations.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra(MAP_LOAD, FUEL_STATIONS_ID)
+            startActivity(intent)
+        }
+        binding.cardViewAmbulances.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra(MAP_LOAD, AMBULANCES_ID)
+            startActivity(intent)
+        }
+
         binding.cardviewInstructions.setOnClickListener{
             val intent = Intent(this, InstructionsActivity::class.java)
             startActivity(intent)

@@ -5,11 +5,15 @@ import com.google.android.gms.maps.model.LatLng
 object DataManager {
     val mechanics = ArrayList<MechanicInfo>()
     val towTrucks = ArrayList<TowTruckInfo>()
+    val fillingStations = ArrayList<FillingStationInfo>()
+    val ambulances = ArrayList<AmbulanceInfo>()
     val instructions = ArrayList<InstructionsInfo>()
 
     init{
         initializeMechs()
         initializeTowTrucks()
+        initializeFillingStations()
+        initializeAmbulances()
         initializeInstructions()
     }
 
@@ -74,6 +78,55 @@ object DataManager {
         )
 
         towTrucks.add(towTruck)
+
+
+    }
+    private fun initializeAmbulances() {
+        var ambulance = AmbulanceInfo(
+            "St Johns Ambulance",
+            "0754231345"
+        )
+
+        ambulances.add(ambulance)
+
+        ambulance = AmbulanceInfo(
+            "AA Ambulance",
+            "0754231345"
+        )
+
+        ambulances.add(ambulance)
+
+        ambulance = AmbulanceInfo(
+            "County Ambulance",
+            "0754231345"
+        )
+
+        ambulances.add(ambulance)
+
+
+    }
+
+    private fun initializeFillingStations() {
+        var fillingStation = FillingStationInfo(
+            "Shell",
+            "0754231345"
+        )
+
+        fillingStations.add(fillingStation)
+
+        fillingStation = FillingStationInfo(
+            "Total",
+            "0754231345"
+        )
+
+        fillingStations.add(fillingStation)
+
+        fillingStation = FillingStationInfo(
+            "BP",
+            "0754231345"
+        )
+
+        fillingStations.add(fillingStation)
 
 
     }
