@@ -30,7 +30,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/muli_black"
-            android:text="Crucial Emergency Response"
+            android:text="@string/app_name"
             android:textColor="#FFFFFF"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,8 @@
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:srcCompat="@drawable/ic_mech_vector_wheel" />
+            app:srcCompat="@drawable/ic_mech_vector_wheel"
+            android:contentDescription="@string/dashboard_logo" />
 
         <com.google.android.material.card.MaterialCardView
             app:strokeColor="@color/material_on_surface_stroke"
@@ -116,7 +117,8 @@
                     android:padding="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_mechanics_illustration">
+                    android:src="@drawable/ic_mechanics_illustration"
+                    android:contentDescription="mechanic illustration">
 
                 </ImageView>
 
@@ -124,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/muli_black"
-                    android:text="Mechanics"
+                    android:text="@string/mechanics"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="16sp">
@@ -168,7 +170,8 @@
                     android:padding="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_tow_truck">
+                    android:src="@drawable/ic_tow_truck"
+                    android:contentDescription="Tow truck illustration">
 
                 </ImageView>
 
@@ -220,7 +223,8 @@
                     android:padding="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_fuel_stations">
+                    android:src="@drawable/ic_fuel_stations"
+                    android:contentDescription="Fuel Station Illustration">
 
                 </ImageView>
 
@@ -271,7 +275,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_ambulance">
+                    android:src="@drawable/ic_ambulance"
+                    android:contentDescription="Ambulance Illustration">
 
                 </ImageView>
 
@@ -320,7 +325,8 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_manual">
+                    android:src="@drawable/ic_manual"
+                    android:contentDescription="Instructions Illustration">
 
                 </ImageView>
 
