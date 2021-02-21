@@ -3,7 +3,9 @@ package com.example.crucialemergencyresponse
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
 import com.google.android.gms.maps.model.LatLng
 import kotlin.math.cos
 import kotlin.math.sin
@@ -43,9 +45,17 @@ object Utils {
         )
 
         val canvas = Canvas(bitmap)
-        drawable.setBounds(0,0,canvas.width,canvas.height)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
         drawable.draw(canvas)
 
-        return Bitmap.createScaledBitmap(bitmap,100,100,false)
+        return Bitmap.createScaledBitmap(bitmap, 100, 100, false)
+    }
+
+    @BindingAdapter("availability")
+    @JvmStatic
+    fun availability(view: TextView, numberAvailable: Int) {
+        val availableText = "$numberAvailable Available"
+
+        view.text = availableText
     }
 }

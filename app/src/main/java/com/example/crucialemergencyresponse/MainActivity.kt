@@ -1,16 +1,13 @@
 package com.example.crucialemergencyresponse
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
 import com.example.crucialemergencyresponse.databinding.ActivityMainBinding
-import com.example.crucialemergencyresponse.databinding.FragmentLoginBinding
 
-private val MainActivity.intent: Intent
-    get() = Intent(this, InstructionsActivity::class.java)
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,10 +21,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //Make the Activity full screen
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        val viewModel: DashboardViewModel =
+            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        binding.apply {
+            this.lifecycleOwner = this@MainActivity
+            this.viewModel = viewModel
+        }
         setContentView(binding.root)
 
 

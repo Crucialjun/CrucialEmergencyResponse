@@ -1,7 +1,5 @@
 package com.example.crucialemergencyresponse
 
-import com.google.android.gms.maps.model.LatLng
-
 object DataManager {
     val mechanics = ArrayList<MechanicInfo>()
     val towTrucks = ArrayList<TowTruckInfo>()
@@ -49,6 +47,13 @@ object DataManager {
 
         mechanic = MechanicInfo(
             "John Doe",
+            "0754231345"
+        )
+
+        mechanics.add(mechanic)
+
+        mechanic = MechanicInfo(
+            "Miriam Cain",
             "0754231345"
         )
 
