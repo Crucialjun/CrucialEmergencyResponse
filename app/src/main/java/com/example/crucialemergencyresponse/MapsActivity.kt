@@ -42,7 +42,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
 
         mapLoad = intent.getIntExtra(MAP_LOAD,0)
-        init()
+
         mapFragment.getMapAsync(this)
     }
 
@@ -102,6 +102,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        init()
 
         Dexter.withContext(this)
             .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
