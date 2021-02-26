@@ -14,10 +14,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -25,7 +23,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
     lateinit var locationRequest: LocationRequest
@@ -102,6 +100,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.setOnMarkerClickListener(this)
         init()
 
         Dexter.withContext(this)
@@ -195,7 +194,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             )
                         )
                     )
-                    mMap.addMarker(markeOption).showInfoWindow()
+                    val marker = mMap.addMarker(markeOption).showInfoWindow()
 
                 }
             }
@@ -243,7 +242,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             )
                         )
                     )
-                    mMap.addMarker(markeOption).showInfoWindow()
+                    val marker = mMap.addMarker(markeOption)
+                    marker.tag = ambulance
 
                 }
             }
@@ -255,5 +255,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
 
         super.onDestroy()
+    }
+
+    override fun onMarkerClick(marker: Marker?): Boolean {
+        val view = layoutInflater.inflate(R.layout.fragment_bootom_sheet,null)
+
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(view)
+        dialog.show()
+
+        return false
     }
 }

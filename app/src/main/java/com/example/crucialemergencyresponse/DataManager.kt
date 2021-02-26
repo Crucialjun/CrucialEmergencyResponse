@@ -33,7 +33,7 @@ object DataManager {
     private fun initializeMechs() {
         var mechanic = MechanicInfo(
             "Cole Hopkins",
-            "0754231345"
+            "0754231345",
         )
 
         mechanics.add(mechanic)
