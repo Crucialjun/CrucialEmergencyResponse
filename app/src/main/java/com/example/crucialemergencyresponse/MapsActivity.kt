@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 
@@ -22,6 +23,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import org.w3c.dom.Text
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -259,6 +261,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMarkerClick(marker: Marker?): Boolean {
         val view = layoutInflater.inflate(R.layout.fragment_bootom_sheet,null)
+        if(mapLoad == AMBULANCES_ID){
+            val ambulance : AmbulanceInfo = marker!!.tag as AmbulanceInfo
+            val name = ambulance.name
+            val phone = ambulance.phone
+
+            view.findViewById<TextView>(R.id.bottom_sheet_name).text = name
+            view.findViewById<TextView>(R.id.bottom_sheet_number).text = phone
+
+        }
+
 
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(view)
