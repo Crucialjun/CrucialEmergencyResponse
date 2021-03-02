@@ -31,7 +31,7 @@ class LoginFragment : Fragment() {
         loginViewBinding = binding
 
         binding.btnLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
+            findNavController().navigate(R.id.action_loginFragment_to_splashActivity)
             requireActivity().finish()
         }
 

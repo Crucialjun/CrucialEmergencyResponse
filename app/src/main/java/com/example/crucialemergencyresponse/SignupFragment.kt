@@ -43,8 +43,7 @@ class SignupFragment : Fragment() {
         binding.btnSignup.setOnClickListener {
             if(validateEmail() && validateUserName() && validatePassword() && validateConfirmPassword()){
 
-                val action = SignupFragmentDirections.actionSignupFragmentToMainActivity(
-                    signupViewBinding.txtInputSignupUsername.editText?.text.toString().trim()
+                val action = SignupFragmentDirections.actionSignupFragmentToSplashActivity(
                 )
                 findNavController().navigate(action)
                 requireActivity().finish()

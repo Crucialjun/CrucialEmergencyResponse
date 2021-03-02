@@ -1,6 +1,8 @@
 package com.example.crucialemergencyresponse
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,6 +22,15 @@ class OnBoardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val prefs: SharedPreferences =
+            applicationContext.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val isFirstTime = prefs.getBoolean("isfirsttime", true)
+
+        if(!isFirstTime){
+            startActivity(Intent(this,LoginSignupActivity::class.java))
+            finish()
+        }
 
         //attach the viewBinding
         viewBinding = ActivityOnBoardingBinding.inflate(layoutInflater)

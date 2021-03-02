@@ -11,7 +11,7 @@ import com.example.crucialemergencyresponse.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private val args : MainActivityArgs by navArgs()
+
 
     lateinit var binding: ActivityMainBinding
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.txtDashboardUsername.text = args.username
+        binding.txtDashboardUsername.text = "UserName"
 
         binding.cardviewMechanics.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)

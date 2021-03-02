@@ -1,6 +1,7 @@
 package com.example.crucialemergencyresponse
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
@@ -196,7 +197,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                             )
                         )
                     )
-                    val marker = mMap.addMarker(markeOption).showInfoWindow()
+                    mMap.addMarker(markeOption).tag = mechanic
 
                 }
             }
@@ -212,7 +213,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                             )
                         )
                     )
-                    mMap.addMarker(markeOption).showInfoWindow()
+                    mMap.addMarker(markeOption).tag = towTruck
 
                 }
             }
@@ -228,7 +229,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                             )
                         )
                     )
-                    mMap.addMarker(markeOption).showInfoWindow()
+                    mMap.addMarker(markeOption).tag = fuelStation
+
 
                 }
             }
@@ -259,17 +261,48 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         super.onDestroy()
     }
 
+    @SuppressLint("InflateParams")
     override fun onMarkerClick(marker: Marker?): Boolean {
         val view = layoutInflater.inflate(R.layout.fragment_bootom_sheet,null)
-        if(mapLoad == AMBULANCES_ID){
-            val ambulance : AmbulanceInfo = marker!!.tag as AmbulanceInfo
-            val name = ambulance.name
-            val phone = ambulance.phone
 
-            view.findViewById<TextView>(R.id.bottom_sheet_name).text = name
-            view.findViewById<TextView>(R.id.bottom_sheet_number).text = phone
+        when(mapLoad){
+            AMBULANCES_ID -> {
+                val ambulance : AmbulanceInfo = marker!!.tag as AmbulanceInfo
+                val name = ambulance.name
+                val phone = ambulance.phone
 
+                view.findViewById<TextView>(R.id.bottom_sheet_name).text = name
+                view.findViewById<TextView>(R.id.bottom_sheet_number).text = phone
+            }
+
+            MECHANICS_ID -> {
+                val mechanic : MechanicInfo = marker!!.tag as MechanicInfo
+                val name = mechanic.name
+                val phone = mechanic.phone
+
+                view.findViewById<TextView>(R.id.bottom_sheet_name).text = name
+                view.findViewById<TextView>(R.id.bottom_sheet_number).text = phone
+            }
+
+            TOW_TRUCKS_ID -> {
+                val towTrucks : TowTruckInfo = marker!!.tag as TowTruckInfo
+                val name = towTrucks.name
+                val phone = towTrucks.phone
+
+                view.findViewById<TextView>(R.id.bottom_sheet_name).text = name
+                view.findViewById<TextView>(R.id.bottom_sheet_number).text = phone
+            }
+
+            FUEL_STATIONS_ID -> {
+                val fuelStations : FillingStationInfo = marker!!.tag as FillingStationInfo
+                val name = fuelStations.name
+                val phone = fuelStations.phone
+
+                view.findViewById<TextView>(R.id.bottom_sheet_name).text = name
+                view.findViewById<TextView>(R.id.bottom_sheet_number).text = phone
+            }
         }
+
 
 
         val dialog = BottomSheetDialog(this)
