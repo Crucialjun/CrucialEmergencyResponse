@@ -127,7 +127,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
-                        android:contentDescription="mechanic illustration"
+                        android:contentDescription="@string/mechanic_illustration"
                         android:padding="4dp"
                         android:src="@drawable/ic_mechanics_illustration">
 
@@ -184,7 +184,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
-                        android:contentDescription="Tow truck illustration"
+                        android:contentDescription="@string/tow_truck_illustration"
                         android:padding="4dp"
                         android:src="@drawable/ic_tow_truck">
 
@@ -195,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:fontFamily="@font/muli_black"
-                        android:text="Tow Trucks"
+                        android:text="@string/tow_trucks"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="16sp">
@@ -241,7 +241,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
-                        android:contentDescription="Fuel Station Illustration"
+                        android:contentDescription="@string/fuel_station_illustration"
                         android:padding="4dp"
                         android:src="@drawable/ic_fuel_stations">
 
@@ -252,7 +252,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:fontFamily="@font/muli_black"
-                        android:text="Fuel Stations"
+                        android:text="@string/fuel_stations"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="16sp">
@@ -298,7 +298,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
-                        android:contentDescription="Ambulance Illustration"
+                        android:contentDescription="@string/ambulance_illustration"
                         android:src="@drawable/ic_ambulance">
 
                     </ImageView>
@@ -308,7 +308,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:fontFamily="@font/muli_black"
-                        android:text="Ambulances"
+                        android:text="@string/ambulances"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="16sp">
@@ -352,7 +352,7 @@
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:contentDescription="Instructions Illustration"
+                        android:contentDescription="@string/instructions_illustration"
                         android:src="@drawable/ic_manual">
 
                     </ImageView>
@@ -364,7 +364,7 @@
                         android:layout_marginStart="8dp"
                         android:fontFamily="@font/muli_black"
                         android:padding="8dp"
-                        android:text="Basics Instructions"
+                        android:text="@string/basics_instructions"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="16sp">

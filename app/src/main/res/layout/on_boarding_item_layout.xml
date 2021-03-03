@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"
             tools:srcCompat="@drawable/ic_ambulance"
-            android:contentDescription="Onboarding image illustration" />
+            android:contentDescription="@string/onboarding_image_illustration" />
 
         <TextView
             android:textColor="@color/colorPrimary"
