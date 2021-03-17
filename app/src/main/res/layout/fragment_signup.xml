@@ -164,13 +164,29 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:textAlignment="center"
         android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/signup"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Signup \n as User"
+        app:layout_constraintEnd_toStartOf="@+id/btn_signup_responder"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_input_signup_confirmpassword" />
+
+    <Button
+        android:textAlignment="center"
+        android:id="@+id/btn_signup_responder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="SignUp \n as Responder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_signup"
         app:layout_constraintTop_toBottomOf="@+id/txt_input_signup_confirmpassword" />
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -241,13 +257,13 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_signup_haveaccount" />
 
     <Button
-        android:background="@android:color/transparent"
-        android:textColor="@color/colorPrimaryVariant"
         android:id="@+id/btn_signup_haveaccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
         android:text="@string/already_have_an_account"
+        android:textColor="@color/colorPrimaryVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
