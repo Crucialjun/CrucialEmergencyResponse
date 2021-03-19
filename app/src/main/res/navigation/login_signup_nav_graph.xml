@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_signupFragment_to_splashActivity"
             app:destination="@id/splashActivity" />
+        <action
+            android:id="@+id/action_signupFragment_to_repondentSignUpApprovalFragment"
+            app:destination="@id/repondentSignUpApprovalFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -28,10 +31,23 @@
         <action
             android:id="@+id/action_loginFragment_to_splashActivity"
             app:destination="@id/splashActivity" />
+        <action
+            android:id="@+id/action_loginFragment_to_respondentDashboardActivity"
+            app:destination="@id/respondentDashboardActivity" />
     </fragment>
     <activity
         android:id="@+id/splashActivity"
         android:name="com.example.crucialemergencyresponse.SplashActivity"
         android:label="activity_splash"
         tools:layout="@layout/activity_splash" />
+    <fragment
+        android:id="@+id/repondentSignUpApprovalFragment"
+        android:name="com.example.crucialemergencyresponse.RepondentSignUpApprovalFragment"
+        android:label="fragment_repondent_sign_up_approval"
+        tools:layout="@layout/fragment_repondent_sign_up_approval" />
+    <activity
+        android:id="@+id/respondentDashboardActivity"
+        android:name="com.example.crucialemergencyresponse.RespondentDashboardActivity"
+        android:label="activity_respondent_dashboard"
+        tools:layout="@layout/activity_respondent_dashboard" />
 </navigation>

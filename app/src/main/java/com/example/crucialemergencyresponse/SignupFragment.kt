@@ -55,6 +55,10 @@ class SignupFragment : Fragment() {
             findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
         }
 
+        binding.btnSignupResponder.setOnClickListener {
+            findNavController().navigate(R.id.action_signupFragment_to_repondentSignUpApprovalFragment)
+        }
+
         signupViewBinding.txtInputSignupConfirmpassword.editText?.addTextChangedListener{
             signupViewBinding.txtInputSignupConfirmpassword.error = null
             signupViewBinding.txtInputSignupConfirmpassword.isErrorEnabled = false

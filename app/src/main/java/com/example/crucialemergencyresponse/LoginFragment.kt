@@ -35,6 +35,10 @@ class LoginFragment : Fragment() {
             requireActivity().finish()
         }
 
+        binding.btnLoginRespondent.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_respondentDashboardActivity)
+        }
+
         binding.btnNewuser.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
