@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="8dp"
     tools:context=".BootomSheetFragment">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -60,5 +61,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/circleImageView6"
         app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_number" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/get_directions"
+        android:text="Get Directions"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar">
+
+    </com.google.android.material.button.MaterialButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,16 +2,18 @@ package com.example.crucialemergencyresponse
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,7 +26,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
-import org.w3c.dom.Text
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -308,6 +310,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(view)
         dialog.show()
+        view.findViewById<Button>(R.id.get_directions).setOnClickListener {
+            val gmmIntent = Uri.parse("google.navigation:q=${marker!!.position.latitude},${marker.position.longitude}")
+            Log.d("TAG", "onMarkerClick: ${marker.position.toString()}")
+            val mapIntent = Intent(Intent.ACTION_VIEW,gmmIntent)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
+        }
 
         return false
     }
