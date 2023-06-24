@@ -111,7 +111,7 @@ class MapsFragment : Fragment() {
         try{
             val success = googleMap
                 .setMapStyle(MapStyleOptions
-                    .loadRawResourceStyle(context,R.raw.uber_maps_style))
+                    .loadRawResourceStyle(requireContext(),R.raw.uber_maps_style))
             if(!success){
                 Log.e("ERROR", "Style parsing Error" )
             }
@@ -152,11 +152,11 @@ class MapsFragment : Fragment() {
         locationRequest.smallestDisplacement = 10f
 
         locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) {
+            override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
 
-                val newPos = LatLng(locationResult!!.lastLocation.latitude
-                    ,locationResult.lastLocation.longitude)
+                val newPos = LatLng(locationResult.lastLocation!!.latitude
+                    ,locationResult.lastLocation!!.longitude)
 
                 setMarkers(newPos)
 
@@ -204,7 +204,7 @@ class MapsFragment : Fragment() {
                     )
                 )
             )
-            mMap.addMarker(markeOption).showInfoWindow()
+            mMap.addMarker(markeOption)?.showInfoWindow()
 
         }
     }

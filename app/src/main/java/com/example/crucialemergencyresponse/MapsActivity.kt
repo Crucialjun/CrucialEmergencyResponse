@@ -57,11 +57,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         locationRequest.smallestDisplacement = 10f
 
         locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) {
+            override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
 
-                val newPos = LatLng(locationResult!!.lastLocation.latitude
-                    ,locationResult.lastLocation.longitude)
+                val newPos = LatLng(locationResult.lastLocation!!.latitude
+                    ,locationResult.lastLocation!!.longitude)
 
                 setMarkers(newPos)
 
@@ -199,7 +199,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                             )
                         )
                     )
-                    mMap.addMarker(markeOption).tag = mechanic
+                    mMap.addMarker(markeOption)?.tag = mechanic
 
                 }
             }
@@ -215,7 +215,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                             )
                         )
                     )
-                    mMap.addMarker(markeOption).tag = towTruck
+                    mMap.addMarker(markeOption)?.tag = towTruck
 
                 }
             }
@@ -231,7 +231,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                             )
                         )
                     )
-                    mMap.addMarker(markeOption).tag = fuelStation
+                    mMap.addMarker(markeOption)?.tag = fuelStation
 
 
                 }
@@ -249,7 +249,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                         )
                     )
                     val marker = mMap.addMarker(markeOption)
-                    marker.tag = ambulance
+                    marker?.tag = ambulance
 
                 }
             }
@@ -263,13 +263,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         super.onDestroy()
     }
 
-    @SuppressLint("InflateParams")
-    override fun onMarkerClick(marker: Marker?): Boolean {
+
+
+    override fun onMarkerClick(marker: Marker): Boolean {
         val view = layoutInflater.inflate(R.layout.fragment_bootom_sheet,null)
 
         when(mapLoad){
             AMBULANCES_ID -> {
-                val ambulance : AmbulanceInfo = marker!!.tag as AmbulanceInfo
+                val ambulance : AmbulanceInfo = marker.tag as AmbulanceInfo
                 val name = ambulance.name
                 val phone = ambulance.phone
 
@@ -278,7 +279,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             }
 
             MECHANICS_ID -> {
-                val mechanic : MechanicInfo = marker!!.tag as MechanicInfo
+                val mechanic : MechanicInfo = marker.tag as MechanicInfo
                 val name = mechanic.name
                 val phone = mechanic.phone
 
@@ -287,7 +288,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             }
 
             TOW_TRUCKS_ID -> {
-                val towTrucks : TowTruckInfo = marker!!.tag as TowTruckInfo
+                val towTrucks : TowTruckInfo = marker.tag as TowTruckInfo
                 val name = towTrucks.name
                 val phone = towTrucks.phone
 
@@ -296,7 +297,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             }
 
             FUEL_STATIONS_ID -> {
-                val fuelStations : FillingStationInfo = marker!!.tag as FillingStationInfo
+                val fuelStations : FillingStationInfo = marker.tag as FillingStationInfo
                 val name = fuelStations.name
                 val phone = fuelStations.phone
 
